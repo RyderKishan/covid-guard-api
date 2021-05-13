@@ -2,7 +2,7 @@
   "name": "covid-guard-api",
   "version": "1.0.0",
   "description": "Covid guard backend - Node Js",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
