@@ -22,8 +22,12 @@ exports.bind = (router) => {
       console.log('onlyAvailable', onlyAvailable);
       const districtIds = JSON.parse(district_ids);
       console.log('districtIds', districtIds);
+      const resp = await get(
+        `${process.env.COVID_API}/appointment/sessions/public/calendarByDistrict?district_id=571&date=${today}`
+      );
+      console.log('resp', resp);
       const allResponse = await Promise.all(
-        districtIds.map(async (districtId) =>
+        districtIds.map((districtId) =>
           get(
             `${process.env.COVID_API}/appointment/sessions/public/calendarByDistrict?district_id=${districtId}&date=${today}`
           )
