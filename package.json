@@ -2,9 +2,9 @@
   "name": "covid-guard-api",
   "version": "1.0.0",
   "description": "Covid guard backend - Node Js",
-  "main": "api/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "build": "netlify-lambda build api",
+    "build": "netlify-lambda build src",
     "start": "nodemon server-local.js"
   },
   "repository": {
