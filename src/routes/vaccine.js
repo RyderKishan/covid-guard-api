@@ -11,6 +11,7 @@ exports.bind = (router) => {
         state_id = 1,
         district_ids = '[]',
       } = req.query;
+      console.log('req.query', req.query);
       const today = new Date().toLocaleDateString().replace(/\//g, '-');
       const stateId = Number(state_id);
       const minAgeLimit = Number(min_age_limit);
@@ -23,6 +24,7 @@ exports.bind = (router) => {
           )
         )
       );
+      console.log('allResponse', allResponse);
       const allCenters = [];
       // fee_type filter
       allResponse.forEach((a) =>
