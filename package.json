@@ -2,8 +2,9 @@
   "name": "covid-guard-api",
   "version": "1.0.0",
   "description": "Covid guard backend - Node Js",
-  "main": "src/index.js",
+  "main": "functions/server.js",
   "scripts": {
+    "postinstall": "netlify-lambda install",
     "build": "netlify-lambda build express",
     "start": "nodemon server-local.js",
     "test": "echo \"Error: no test specified\" && exit 1"
