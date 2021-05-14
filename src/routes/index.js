@@ -7,7 +7,7 @@ exports.initialize = (router) => {
   router.get('/ping', (req, res) => {
     res.status(200).json({
       message: 'Application UP!',
-      env: process.env,
+      // env: process.env,
       timeStamp: new Date(),
     });
   });

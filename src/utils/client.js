@@ -1,14 +1,14 @@
 const Redis = require('ioredis');
 
 const client = new Redis({
-  port: process.env.REDIS_PORT,
+  port: process.env.REDIS_PORT || 6379,
   retryStrategy(times) {
     const delay = times * 1000;
     if (times > 5) return undefined;
     return delay;
   },
   maxRetriesPerRequest: 5000,
-  host: process.env.REDIS_HOST,
+  host: process.env.REDIS_HOST || '',
   db: 0,
 });
 
