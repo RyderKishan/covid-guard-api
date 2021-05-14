@@ -2,20 +2,22 @@
 const express = require('express');
 const path = require('path');
 const serverless = require('serverless-http');
-const app = express();
+const cors = require('cors');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const routes = require('../routes');
 
+const app = express();
 const router = express.Router();
-router.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('<h1>Hello from Express.js!</h1>');
-  res.end();
-});
-router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
-router.post('/', (req, res) => res.json({ postBody: req.body }));
 
+routes.initialize(router);
+
+app.use(cors());
+app.use(morgan('tiny'));
 app.use(bodyParser.json());
-app.use('/.netlify/functions/api', router);  // path must route to lambda
+app.use(express.static(path.join(__dirname, '../../public')));
+
+app.use('/.netlify/functions/api', router);
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 module.exports = app;

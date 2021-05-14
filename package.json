@@ -22,12 +22,17 @@
     "url": "https://github.com/RyderKishan/covid-guard-api/issues"
   },
   "homepage": "https://github.com/RyderKishan/covid-guard-api#readme",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "netlify-lambda": "^1.6.3",
+    "morgan": "^1.10.0",
     "nodemon": "^1.19.2",
+    "ramda": "^0.27.1",
     "serverless-http": "^2.3.0"
+  },
+  "devDependencies": {
+    "netlify-lambda": "^1.6.3"
   }
 }
