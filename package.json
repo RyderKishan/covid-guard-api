@@ -25,7 +25,7 @@
     "url": "https://github.com/RyderKishan/covid-guard-api/issues"
   },
   "homepage": "https://github.com/RyderKishan/covid-guard-api#readme",
-  "devDependencies": {
+  "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
@@ -35,15 +35,15 @@
     "node-fetch": "^2.6.1",
     "nodemon": "^1.19.2",
     "ramda": "^0.27.1",
-    "serverless-http": "^2.3.0",
+    "serverless-http": "^2.3.0"
+  },
+  "devDependencies": {
+    "encoding": "^0.1.13",
     "eslint": "^7.26.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.0",
     "netlify-lambda": "^1.6.3",
     "prettier": "2.3.0"
-  },
-  "dependencies": {
-    "encoding": "^0.1.13"
   }
 }
