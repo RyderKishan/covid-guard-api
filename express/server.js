@@ -18,7 +18,7 @@ router.get('/ping', (req, res) => {
     .status(200)
     .json({
       message: 'Application UP! ping',
-      containerName: os.hostname(),
+      // containerName: os.hostname(),
       timeStamp: new Date(),
     });
 });
@@ -27,7 +27,7 @@ router.get('/health', (req, res) => {
     .status(200)
     .json({
       message: 'Application UP!',
-      containerName: os.hostname(),
+      // containerName: os.hostname(),
       timeStamp: new Date(),
     });
 });
