@@ -4,7 +4,7 @@
   "description": "Covid guard backend - Node Js",
   "main": "src/index.js",
   "scripts": {
-    "build": "netlify-lambda build src",
+    "build": "netlify-lambda build src/api",
     "start": "nodemon server-local.js"
   },
   "repository": {
