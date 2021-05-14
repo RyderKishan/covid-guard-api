@@ -1,8 +1,10 @@
+const fetch = require('node-fetch');
+
 const { get } = require('../utils/request');
 
 exports.bind = (router) => {
   router.get('/vaccine/availability', async (req, res) => {
-    try {
+    // try {
       const {
         vaccine = 'covaxin',
         min_age_limit = 45,
@@ -22,10 +24,6 @@ exports.bind = (router) => {
       console.log('onlyAvailable', onlyAvailable);
       const districtIds = JSON.parse(district_ids);
       console.log('districtIds', districtIds);
-      const resp = await get(
-        `${process.env.COVID_API}/appointment/sessions/public/calendarByDistrict?district_id=571&date=${today}`
-      );
-      console.log('resp', resp);
       const allResponse = await Promise.all(
         districtIds.map((districtId) =>
           get(
@@ -33,7 +31,7 @@ exports.bind = (router) => {
           )
         )
       );
-      console.log('allResponse', allResponse);
+      console.log('allResponse');
       const allCenters = [];
       console.log('allCenters', allCenters);
       // fee_type filter
@@ -44,7 +42,7 @@ exports.bind = (router) => {
           )
         )
       );
-      console.log('allCenters 2', allCenters);
+      console.log('allCenters 2');
       // min_age_limit filter
       const finalCenters = allCenters
         .map((c) => {
@@ -54,17 +52,17 @@ exports.bind = (router) => {
               (s.vaccine || '').toLowerCase() === vaccine &&
               (onlyAvailable ? s.available_capacity > 0 : true)
           );
-          console.log('filteredSessions', filteredSessions);
+          // console.log('filteredSessions');
           return { ...c, stateId, sessions: filteredSessions };
         })
         .filter((c) => c.sessions && c.sessions.length > 0);
-      console.log('allCenters', allCenters);
+      console.log('allCenters 3');
       res.status(200).json(finalCenters);
-    } catch (exeption) {
-      res.status(500).json({
-        status: 500,
-        message: JSON.stringify(exeption),
-      });
-    }
+    // } catch (exeption) {
+    //   res.status(500).json({
+    //     status: 500,
+    //     message: JSON.stringify(exeption),
+    //   });
+    // }
   });
 };
