@@ -1,6 +1,5 @@
-
 [build]
   functions = "functions"
 
 [functions]
-  directory = "api"
+  directory = "api/app"

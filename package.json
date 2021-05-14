@@ -4,9 +4,8 @@
   "description": "Covid guard backend - Node Js",
   "main": "src/index.js",
   "scripts": {
-    "postinstall": "netlify-lambda install",
-    "start": "netlify-lambda serve api",
-    "build": "netlify-lambda build api",
+    "build": "netlify-lambda build api/app",
+    "start": "nodemon api/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,10 +20,16 @@
   "author": "Balkishan Sembulingam",
   "license": "ISC",
   "devDependencies": {
-    "netlify-lambda": "^2.0.6"
+    "eslint": "^7.26.0",
+    "netlify-lambda": "^2.0.6",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.3.0"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "node-fetch": "^2.6.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
+    "serverless-http": "^2.7.0"
   }
 }
