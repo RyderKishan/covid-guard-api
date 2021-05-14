@@ -1,7 +1,4 @@
 const { get } = require('../utils/request');
-const client = require('../utils/client');
-
-const EXPIRY = (process.env.REDIS_KEY_EXPIRE_MINS || 30) * 60;
 
 exports.bind = (router) => {
   router.get('/vaccine/availability', async (req, res) => {
@@ -19,30 +16,12 @@ exports.bind = (router) => {
       const minAgeLimit = Number(min_age_limit);
       const onlyAvailable = only_available === 'true';
       const districtIds = JSON.parse(district_ids);
-      const paths = districtIds.map(
-        (districtId) =>
-          `/appointment/sessions/public/calendarByDistrict?district_id=${districtId}&date=${today}`
-      );
-      const redisResponse = await Promise.all(
-        paths.map(async (path) => client.get(path))
-      );
       const allResponse = await Promise.all(
-        paths.map(async (path, ind) => {
-          if (redisResponse[ind])
-            return Promise.resolve(JSON.parse(redisResponse[ind]));
-          return get(`${process.env.COVID_API}${path}`);
-        })
-      );
-      await Promise.all(
-        paths.map(async (path, ind) => {
-          if (redisResponse[ind]) return Promise.resolve();
-          return client.set(
-            path,
-            JSON.stringify(allResponse[ind]),
-            'ex',
-            EXPIRY
-          );
-        })
+        districtIds.map(async (districtId) =>
+          get(
+            `${process.env.COVID_API}/appointment/sessions/public/calendarByDistrict?district_id=${districtId}&date=${today}`
+          )
+        )
       );
       const allCenters = [];
       // fee_type filter
