@@ -42,5 +42,8 @@
     "eslint-plugin-import": "^2.23.0",
     "netlify-lambda": "^1.6.3",
     "prettier": "2.3.0"
+  },
+  "dependencies": {
+    "encoding": "^0.1.13"
   }
 }
