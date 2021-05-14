@@ -4,6 +4,8 @@
   "description": "Covid guard backend - Node Js",
   "main": "src/index.js",
   "scripts": {
+    "format:check": "prettier --check src",
+    "format:write": "prettier --write src",
     "build": "netlify-lambda build src/server",
     "start": "nodemon server-local.js"
   },
@@ -33,6 +35,11 @@
     "serverless-http": "^2.3.0"
   },
   "devDependencies": {
-    "netlify-lambda": "^1.6.3"
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.0",
+    "netlify-lambda": "^1.6.3",
+    "prettier": "2.3.0"
   }
 }
