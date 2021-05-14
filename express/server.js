@@ -25,9 +25,28 @@ router.get('/call', (req, res) => {
 });
 router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
 router.post('/', (req, res) => res.json({ postBody: req.body }));
+router.get('/ping', (req, res) => {
+  res
+    .status(200)
+    .json({
+      message: 'Application UP! ping',
+      containerName: os.hostname(),
+      timeStamp: new Date(),
+    });
+});
+router.get('/health', (req, res) => {
+  res
+    .status(200)
+    .json({
+      message: 'Application UP!',
+      containerName: os.hostname(),
+      timeStamp: new Date(),
+    });
+});
 
 app.use(bodyParser.json());
-app.use('/.netlify/functions/', router); // path must route to lambda
+app.use('/.netlify/functions/server', router); // path must route to lambda
+app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 module.exports = app;
 module.exports.handler = serverless(app);
