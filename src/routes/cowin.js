@@ -19,7 +19,10 @@ exports.bind = (router) => {
       await client.set(path, JSON.stringify(response), 'ex', EXPIRY);
       res.status(200).json(response);
     } catch (e) {
-      res.status(500).json(e);
+      res.status(500).json({
+        status: 500,
+        message: JSON.stringify(e),
+      });
     }
   });
 };
