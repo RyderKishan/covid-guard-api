@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 const { get } = require('../utils/request');
 
 exports.bind = (router) => {
@@ -33,7 +31,7 @@ exports.bind = (router) => {
       );
       console.log('allResponse');
       const allCenters = [];
-      console.log('allCenters', allCenters);
+      console.log('allCenters');
       // fee_type filter
       allResponse.forEach((a) =>
         allCenters.push(
@@ -52,7 +50,6 @@ exports.bind = (router) => {
               (s.vaccine || '').toLowerCase() === vaccine &&
               (onlyAvailable ? s.available_capacity > 0 : true)
           );
-          // console.log('filteredSessions');
           return { ...c, stateId, sessions: filteredSessions };
         })
         .filter((c) => c.sessions && c.sessions.length > 0);
