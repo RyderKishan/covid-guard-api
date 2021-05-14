@@ -1,35 +1,115 @@
-const R = require('ramda');
-const axios = require('axios');
+const fetch = require('node-fetch');
+const { pathOr } = require('ramda');
 
-function CustomException(error) {
-  return {
-    message: R.pathOr('', ['message'], error),
-    status: R.pathOr(500, ['response', 'status'], error),
-    url: R.pathOr(500, ['response', 'config', 'url'], error),
-    statusText: R.pathOr('', ['response', 'statusText'], error),
-    data: R.pathOr(null, ['response', 'data'], error),
-  };
+class CustomException extends Error {
+  constructor(error) {
+    super(error);
+    this.message = 'CustomException';
+    this.data = error.data;
+    this.status = error.status;
+    this.url = error.url;
+    this.statusText = error.statusText;
+  }
 }
 
-const get = (endpoint, headers, options = {}) => {
+const ErrorObject = async (response) => {
+  const error = {
+    status: pathOr(500, ['status'], response),
+    url: pathOr('', ['url'], response),
+    statusText: pathOr('', ['statusText'], response),
+  };
+  try {
+    error.data = await response.json();
+  } catch (e) {
+    error.empty = true;
+  }
+  return error;
+};
+
+const get = async (endpoint, headers, options = {}) => {
   const commonHeaders = {
     'Content-Type': 'application/json',
+    'user-agent':
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
   };
   const commonOptions = {
     method: 'GET',
     ...options,
   };
-  return axios
-    .get(endpoint, {
-      ...commonOptions,
-      headers: { ...commonHeaders, ...headers },
-    })
-    .then((response) => response.data)
-    .catch((error) => {
-      throw new CustomException(error);
-    });
+  const response = await fetch(endpoint, {
+    ...commonOptions,
+    headers: { ...commonHeaders, ...headers },
+  });
+  if (response.ok && response.status === 200) {
+    return response.json();
+  }
+  const errorObject = await ErrorObject(response);
+  throw new CustomException(errorObject);
 };
 
-module.exports = {
-  get,
+const del = async (endpoint, headers, options = {}) => {
+  const commonHeaders = {
+    'Content-Type': 'application/json',
+    'user-agent':
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+  };
+  const commonOptions = {
+    method: 'DELETE',
+    ...options,
+  };
+  const response = await fetch(endpoint, {
+    ...commonOptions,
+    headers: { ...commonHeaders, ...headers },
+  });
+  if (response.ok && response.status === 200) {
+    return response.json();
+  }
+  const errorObject = await ErrorObject(response);
+  throw new CustomException(errorObject);
 };
+
+const post = async (endpoint, body, headers, options = {}) => {
+  const commonHeaders = {
+    'Content-Type': 'application/json',
+    'user-agent':
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+  };
+  const commonOptions = {
+    method: 'POST',
+    ...options,
+  };
+  const response = await fetch(endpoint, {
+    ...commonOptions,
+    body: JSON.stringify(body),
+    headers: { ...commonHeaders, ...headers },
+  });
+  if (response.ok && response.status === 200) {
+    return response.json();
+  }
+  const errorObject = await ErrorObject(response);
+  throw new CustomException(errorObject);
+};
+
+const put = async (endpoint, body, headers, options = {}) => {
+  const commonHeaders = {
+    'Content-Type': 'application/json',
+    'user-agent':
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+  };
+  const commonOptions = {
+    method: 'PUT',
+    ...options,
+  };
+  const response = await fetch(endpoint, {
+    ...commonOptions,
+    body: JSON.stringify(body),
+    headers: { ...commonHeaders, ...headers },
+  });
+  if (response.ok && response.status === 200) {
+    return response.json();
+  }
+  const errorObject = await ErrorObject(response);
+  throw new CustomException(errorObject);
+};
+
+module.exports = { get, post, del, put };
