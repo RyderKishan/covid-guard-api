@@ -2,10 +2,12 @@
   "name": "covid-guard-api",
   "version": "1.0.0",
   "description": "Covid guard backend - Node Js",
-  "main": "functions/server.js",
+  "main": "src/index.js",
   "scripts": {
-    "build": "netlify-lambda build src",
-    "start": "nodemon server-local.js"
+    "postinstall": "netlify-lambda install",
+    "start": "netlify-lambda serve api",
+    "build": "netlify-lambda build api",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -18,22 +20,11 @@
   ],
   "author": "Balkishan Sembulingam",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/RyderKishan/covid-guard-api/issues"
-  },
-  "homepage": "https://github.com/RyderKishan/covid-guard-api#readme",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "morgan": "^1.10.0",
-    "netlify-lambda": "^2.0.6",
-    "serverless-http": "^2.7.0"
-  },
   "devDependencies": {
-    "eslint": "^7.26.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "nodemon": "^2.0.7",
-    "prettier": "^2.3.0"
+    "netlify-lambda": "^2.0.6"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "node-fetch": "^2.6.1"
   }
 }
