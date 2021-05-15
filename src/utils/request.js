@@ -34,6 +34,7 @@ const commonHeaders = {
   'cache-control': 'no-cache',
   'postman-token': uuid(),
   // host: 'localhost:9000',
+  'Accept-Language': 'en_US',
   host: 'cdn-api.co-vin.in',
   'accept-encoding': 'gzip, deflate, br',
   connection: 'keep-alive',

@@ -20,14 +20,14 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
   res.header(
     'Access-Control-Allow-Headers',
-    'Content-Type, Authorization, Content-Length, X-Requested-With'
+    'Content-Type, Authorization, Content-Length, X-Requested-With, Host'
   );
   next();
 });
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(compression());
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 app.use(
   morgan(
