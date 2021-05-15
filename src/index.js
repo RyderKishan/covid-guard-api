@@ -21,6 +21,13 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 
+app.get('/ping', async (req, res) => {
+  res.status(200).json({
+    message: 'UP!',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.get('/cowin/states', async (req, res) => {
   try {
     const response = await get(
