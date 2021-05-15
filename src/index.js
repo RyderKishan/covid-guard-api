@@ -10,7 +10,7 @@ const Logger = require('./utils/logger');
 const routes = require('./routes');
 
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 9000;
 
 app.use((req, res, next) => {
   res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
