@@ -29,15 +29,15 @@ const ErrorObject = async (response) => {
 };
 
 const commonHeaders = {
-  'user-agent': 'PostmanRuntime/7.28.0',
-  accept: '*/*',
-  'cache-control': 'no-cache',
-  'postman-token': uuid(),
-  // host: 'localhost:9000',
-  'Accept-Language': 'en_US',
-  host: 'cdn-api.co-vin.in',
-  'accept-encoding': 'gzip, deflate, br',
-  connection: 'keep-alive',
+  // 'user-agent': 'PostmanRuntime/7.28.0',
+  // accept: '*/*',
+  // 'cache-control': 'no-cache',
+  // 'postman-token': uuid(),
+  // // host: 'localhost:9000',
+  // 'Accept-Language': 'en_US',
+  // host: 'cdn-api.co-vin.in',
+  // 'accept-encoding': 'gzip, deflate, br',
+  // connection: 'keep-alive',
 };
 
 // const commonHeaders = {
