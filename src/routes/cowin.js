@@ -7,31 +7,47 @@ const exceptionHandler = require('../utils/exceptionHandler');
 
 const router = express.Router();
 
+const commonHeaders = {
+  'content-type': 'application/json',
+  'accept-language': 'en_US',
+  // origin: 'https://selfregistration.cowin.gov.in',
+  // referer: 'https://selfregistration.cowin.gov.in/',
+  // authorization: `Bearer ${process.env.TOKEN || ''}`,
+  'user-agent':
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+};
+
 router.get('/states', async (req, res) => {
   try {
     const url = `${process.env.COVID_API}/admin/location/states`;
     const data = [];
 
     https
-      .get(url, (response) => {
-        const headerDate =
-          response.headers && response.headers.date
-            ? response.headers.date
-            : 'no response date';
-        console.log('Status Code:', response.statusCode);
-        console.log('Date in Response header:', headerDate);
+      .get(
+        url,
+        {
+          headers: commonHeaders,
+        },
+        (response) => {
+          const headerDate =
+            response.headers && response.headers.date
+              ? response.headers.date
+              : 'no response date';
+          console.log('Status Code:', response.statusCode);
+          console.log('Date in Response header:', headerDate);
 
-        response.on('data', (chunk) => {
-          data.push(chunk);
-        });
+          response.on('data', (chunk) => {
+            data.push(chunk);
+          });
 
-        response.on('end', () => {
-          console.log('Response ended: ');
-          const states = JSON.parse(Buffer.concat(data).toString());
-          console.log('states');
-          res.status(200).json(states);
-        });
-      })
+          response.on('end', () => {
+            console.log('Response ended: ');
+            const states = JSON.parse(Buffer.concat(data).toString());
+            console.log('states');
+            res.status(200).json(states);
+          });
+        }
+      )
       .on('error', (err) => {
         console.log('Error: ', err.message);
         res.status(500).json(err);
