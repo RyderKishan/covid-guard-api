@@ -11,7 +11,7 @@ const PKI_FILE = path.join(
 );
 
 router.get('/', async (req, res) => {
-  res.status(200).json('666');
+  res.status(200).json('7777');
 });
 
 router.get(
