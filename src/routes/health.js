@@ -11,7 +11,15 @@ const PKI_FILE = path.join(
 );
 
 router.get('/', async (req, res) => {
-  res.status(200).json('7777');
+  res.status(200).json('Covid Guard Api');
+});
+
+router.get('/ping', async (req, res) => {
+  try {
+    res.status(200).json();
+  } catch (e) {
+    res.status(500).json(e);
+  }
 });
 
 router.get(
@@ -20,16 +28,6 @@ router.get(
     res.status(200).sendFile(PKI_FILE);
   }
 );
-
-router.get('/ping', async (req, res) => {
-  try {
-    console.log('req', req.headers);
-    // console.log('req', req);
-    res.status(200).json('req');
-  } catch (e) {
-    res.status(500).json(e);
-  }
-});
 
 router.get('/health', (req, res) => {
   res.status(200).json({

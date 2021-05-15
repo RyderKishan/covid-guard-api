@@ -29,26 +29,19 @@ const ErrorObject = async (response) => {
 };
 
 const commonHeaders = {
-  // 'user-agent': 'PostmanRuntime/7.28.0',
-  // accept: '*/*',
-  // 'cache-control': 'no-cache',
-  // 'postman-token': uuid(),
-  // // host: 'localhost:9000',
-  // 'Accept-Language': 'en_US',
-  // host: 'cdn-api.co-vin.in',
-  // 'accept-encoding': 'gzip, deflate, br',
-  // connection: 'keep-alive',
+  accept:
+    'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  authority: 'cdn-api.co-vin.in',
+  host: 'cdn-api.co-vin.in',
+  connection: 'close',
+  pragma: 'no-cache',
+  'user-agent': 'PostmanRuntime/7.28.0',
+  'cache-control': 'no-cache',
+  'postman-token': uuid(),
+  'Accept-Language': 'en_US',
+  'content-type': 'application/json',
+  'accept-encoding': 'gzip, deflate, br',
 };
-
-// const commonHeaders = {
-//   'content-type': 'application/json',
-//   'accept-language': 'en_US',
-//   // origin: 'https://selfregistration.cowin.gov.in',
-//   // referer: 'https://selfregistration.cowin.gov.in/',
-//   // authorization: `Bearer ${process.env.TOKEN || ''}`,
-//   'user-agent':
-//     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
-// };
 
 const get = async (endpoint, headers, options = {}) => {
   const commonOptions = {
