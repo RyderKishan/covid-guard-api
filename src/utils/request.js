@@ -1,4 +1,6 @@
 const fetch = require('node-fetch');
+const uuid = require('uuid').v4;
+
 const { pathOr } = require('ramda');
 
 class CustomException extends Error {
@@ -27,14 +29,25 @@ const ErrorObject = async (response) => {
 };
 
 const commonHeaders = {
-  'content-type': 'application/json',
-  'accept-language': 'en_US',
-  // origin: 'https://selfregistration.cowin.gov.in',
-  // referer: 'https://selfregistration.cowin.gov.in/',
-  // authorization: `Bearer ${process.env.TOKEN || ''}`,
-  'user-agent':
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+  'user-agent': 'PostmanRuntime/7.28.0',
+  accept: '*/*',
+  'cache-control': 'no-cache',
+  'postman-token': uuid(),
+  // host: 'localhost:9000',
+  host: 'cdn-api.co-vin.in',
+  'accept-encoding': 'gzip, deflate, br',
+  connection: 'keep-alive',
 };
+
+// const commonHeaders = {
+//   'content-type': 'application/json',
+//   'accept-language': 'en_US',
+//   // origin: 'https://selfregistration.cowin.gov.in',
+//   // referer: 'https://selfregistration.cowin.gov.in/',
+//   // authorization: `Bearer ${process.env.TOKEN || ''}`,
+//   'user-agent':
+//     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+// };
 
 const get = async (endpoint, headers, options = {}) => {
   const commonOptions = {
