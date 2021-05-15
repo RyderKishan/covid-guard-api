@@ -1,8 +1,12 @@
-// const { get } = require('../utils/request');
+const express = require('express');
+const LOG = require('../utils/logger');
+const exceptionHandler = require('../utils/exceptionHandler');
 
-exports.bind = (router) => {
-  router.get('/cowin/states', async (req, res) => {
-    // try {
+const router = express.Router();
+
+router.get('/states', async (req, res) => {
+  LOG.info('URI : Local');
+  try {
     const path = '/admin/location/states';
     fetch(`${process.env.COVID_API}${path}`)
       .then((response) => {
@@ -12,11 +16,9 @@ exports.bind = (router) => {
         console.log('err', err);
         res.status(500).json(err);
       });
-    // } catch (e) {
-    // res.status(500).json({
-    //   status: 500,
-    //   message: JSON.stringify(e),
-    // });
-    // }
-  });
-};
+  } catch (error) {
+    exceptionHandler(error, res);
+  }
+});
+
+module.exports = router;
