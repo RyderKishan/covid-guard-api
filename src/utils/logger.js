@@ -2,7 +2,7 @@ const winston = require('winston');
 
 const outputFormat = winston.format.printf(
   (info) =>
-    `${new Date(info.timestamp).toLocaleString()} ${info.level} :: ${
+    `${new Date(info.timestamp).toLocaleTimeString()} [${info.level}] ${
       info.label
     } ${info.message}`
 );
