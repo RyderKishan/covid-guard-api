@@ -1,5 +1,7 @@
 const express = require('express');
 const os = require('os');
+const fs = require('fs');
+const path = require('path');
 
 const router = express.Router();
 
@@ -17,6 +19,16 @@ router.get('/health', (req, res) => {
     env: process.env,
     containerName: os.hostname(),
     timeStamp: new Date().toISOString(),
+  });
+});
+
+router.get('/read', (req, res) => {
+  const fileList = [];
+  fs.readdirSync(path.join(__dirname, '../../')).forEach((file) => {
+    fileList.push(file);
+  });
+  res.status(200).json({
+    fileList,
   });
 });
 

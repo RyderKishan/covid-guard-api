@@ -1,7 +1,10 @@
 const winston = require('winston');
 
 const outputFormat = winston.format.printf(
-  (info) => `${info.timestamp} ${info.level}: ${info.label} ${info.message}`
+  (info) =>
+    `${new Date(info.timestamp).toLocaleString()} ${info.level} :: ${
+      info.label
+    } ${info.message}`
 );
 
 const logFormat = winston.format.combine(

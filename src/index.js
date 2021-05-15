@@ -18,10 +18,10 @@ app.use((req, res, next) => {
   res.header('Pragma', 'no-cache');
   next();
 });
-
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(compression());
 app.use(cors());
-// app.use(morgan('tiny'));
+app.use(bodyParser.json());
 app.use(
   morgan(
     (tokens, req, res) =>
@@ -35,9 +35,7 @@ app.use(
     { stream: Logger.stream }
   )
 );
-app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, '../public')));
 
 routes.bind(app);
 
