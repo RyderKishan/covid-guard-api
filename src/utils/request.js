@@ -26,17 +26,17 @@ const ErrorObject = async (response) => {
   return error;
 };
 
+const commonHeaders = {
+  'content-type': 'application/json',
+  'accept-encoding': 'gzip, deflate, br',
+  'accept-language': 'en_US',
+  accept:
+    'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent':
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+};
+
 const get = async (endpoint, headers, options = {}) => {
-  const commonHeaders = {
-    'content-type': 'application/json',
-    'accept-encoding': 'gzip, deflate, br',
-    'accept-language': 'en_US',
-    accept:
-      'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-    host: 'search-vaccine-api.netlify.app',
-    'user-agent':
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
-  };
   const commonOptions = {
     method: 'GET',
     ...options,
@@ -55,11 +55,6 @@ const get = async (endpoint, headers, options = {}) => {
 };
 
 const del = async (endpoint, headers, options = {}) => {
-  const commonHeaders = {
-    'Content-Type': 'application/json',
-    'user-agent':
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
-  };
   const commonOptions = {
     method: 'DELETE',
     ...options,
@@ -76,11 +71,6 @@ const del = async (endpoint, headers, options = {}) => {
 };
 
 const post = async (endpoint, body, headers, options = {}) => {
-  const commonHeaders = {
-    'Content-Type': 'application/json',
-    'user-agent':
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
-  };
   const commonOptions = {
     method: 'POST',
     ...options,
@@ -98,11 +88,6 @@ const post = async (endpoint, body, headers, options = {}) => {
 };
 
 const put = async (endpoint, body, headers, options = {}) => {
-  const commonHeaders = {
-    'Content-Type': 'application/json',
-    'user-agent':
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
-  };
   const commonOptions = {
     method: 'PUT',
     ...options,
