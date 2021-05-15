@@ -7,7 +7,7 @@ const router = express.Router();
 
 const PKI_FILE = path.join(
   __dirname,
-  '../../public/B97645502D106ED1E667E38D31617749.txt'
+  '../../public/A5D1FA7A50EFD921890B3ACEAFDE7AB4.txt'
 );
 
 router.get('/', async (req, res) => {
@@ -23,7 +23,7 @@ router.get('/ping', async (req, res) => {
 });
 
 router.get(
-  '/.well-known/pki-validation/B97645502D106ED1E667E38D31617749.txt',
+  '/.well-known/pki-validation/A5D1FA7A50EFD921890B3ACEAFDE7AB4.txt',
   async (req, res) => {
     res.status(200).sendFile(PKI_FILE);
   }
