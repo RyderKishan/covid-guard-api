@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const uuid = require('uuid').v4;
 
 const { pathOr } = require('ramda');
 
@@ -29,18 +28,10 @@ const ErrorObject = async (response) => {
 };
 
 const commonHeaders = {
-  accept:
-    'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  authority: 'cdn-api.co-vin.in',
   host: 'cdn-api.co-vin.in',
-  connection: 'close',
-  pragma: 'no-cache',
-  'user-agent': 'PostmanRuntime/7.28.0',
-  'cache-control': 'no-cache',
-  'postman-token': uuid(),
+  'User-Agent':
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36',
   'Accept-Language': 'en_US',
-  'content-type': 'application/json',
-  'accept-encoding': 'gzip, deflate, br',
 };
 
 const get = async (endpoint, headers, options = {}) => {
