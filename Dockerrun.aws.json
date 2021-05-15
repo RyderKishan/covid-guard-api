@@ -1,0 +1,7 @@
+{
+  "AWSEBDockerrunVersion": "3",
+  "Image": {
+    "Name": "redis"
+  },
+  "Ports": [{ "ContainerPort": "8080" }]
+}

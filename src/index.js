@@ -12,12 +12,19 @@ const routes = require('./routes');
 const app = express();
 const PORT = process.env.PORT || 9000;
 
-// app.use((req, res, next) => {
-//   res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-//   res.header('Expires', '-1');
-//   res.header('Pragma', 'no-cache');
-//   next();
-// });
+app.use((req, res, next) => {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With'
+  );
+  next();
+});
+
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(compression());
 app.use(cors());
@@ -35,7 +42,6 @@ app.use(
     { stream: Logger.stream }
   )
 );
-
 
 routes.bind(app);
 
