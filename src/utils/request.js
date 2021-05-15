@@ -29,12 +29,11 @@ const ErrorObject = async (response) => {
 const commonHeaders = {
   'content-type': 'application/json',
   'accept-language': 'en_US',
-  origin: 'https://selfregistration.cowin.gov.in',
-  referer: 'https://selfregistration.cowin.gov.in/',
-  authorization: `Bearer ${process.env.TOKEN || ''}`,
+  // origin: 'https://selfregistration.cowin.gov.in',
+  // referer: 'https://selfregistration.cowin.gov.in/',
+  // authorization: `Bearer ${process.env.TOKEN || ''}`,
   'user-agent':
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
-  // host: 'covid-guard-api-prod.us-east-1.elasticbeanstalk.com',
 };
 
 const get = async (endpoint, headers, options = {}) => {
@@ -46,8 +45,6 @@ const get = async (endpoint, headers, options = {}) => {
     ...commonOptions,
     headers: { ...commonHeaders, ...headers },
   });
-  console.log('headers', response.headers);
-  console.log('type', response.type);
   if (response.ok && response.status === 200) {
     return response.json();
   }
