@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(compression());
-// app.use(cors());
+app.use(cors());
 app.use(bodyParser.json());
 app.use(
   morgan(
@@ -46,5 +46,7 @@ app.use(
 routes.bind(app);
 
 app.listen(PORT, () =>
-  console.log(`Covid Guard Api listening on port ${PORT}!`)
+  console.log(
+    `Covid Guard Api listening on port ${PORT} at ${new Date().toLocaleString()}`
+  )
 );
