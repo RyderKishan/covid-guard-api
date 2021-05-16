@@ -6,21 +6,16 @@ const exceptionHandler = require('../utils/exceptionHandler');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/kishan', async (req, res) => {
   try {
-    const {
-      vaccine = 'covaxin',
-      min_age_limit = 45,
-      only_available = 'false',
-      fee_type = 'free',
-      state_id = 1,
-      district_ids = '[]',
-    } = req.query;
+    const vaccine = ['covaxin', 'covishield'];
+    const minAgeLimit = 15;
+    const maxAgeLimit = 30;
+    const onlyAvailable = true;
+    const feeType = ['free', 'paid'];
+    const districtIds = [540, 549, 580, 780];
     const today = new Date().toLocaleDateString().replace(/\//g, '-');
-    const stateId = Number(state_id);
-    const minAgeLimit = Number(min_age_limit);
-    const onlyAvailable = only_available === 'true';
-    const districtIds = JSON.parse(district_ids);
+
     const allResponse = await Promise.all(
       districtIds.map(async (districtId) =>
         get(
@@ -28,12 +23,16 @@ router.get('/', async (req, res) => {
         )
       )
     );
+    console.log(
+      'URL',
+      `${process.env.COVID_API}/appointment/sessions/public/calendarByDistrict?district_id=${districtIds}&date=${today}`
+    );
     const allCenters = [];
     // fee_type filter
     allResponse.forEach((a) =>
       allCenters.push(
-        ...(a.centers || []).filter(
-          (c) => (c.fee_type || '').toLowerCase() === fee_type
+        ...(a.centers || []).filter((c) =>
+          feeType.includes(c.fee_type.toLowerCase())
         )
       )
     );
@@ -42,11 +41,12 @@ router.get('/', async (req, res) => {
       .map((c) => {
         const filteredSessions = (c.sessions || []).filter(
           (s) =>
-            s.min_age_limit === minAgeLimit &&
-            (s.vaccine || '').toLowerCase() === vaccine &&
+            s.min_age_limit > minAgeLimit &&
+            s.min_age_limit < maxAgeLimit &&
+            vaccine.includes((s.vaccine || '').toLowerCase()) &&
             (onlyAvailable ? s.available_capacity > 0 : true)
         );
-        return { ...c, stateId, sessions: filteredSessions };
+        return { ...c, sessions: filteredSessions };
       })
       .filter((c) => c.sessions && c.sessions.length > 0);
     res.status(200).json(finalCenters);

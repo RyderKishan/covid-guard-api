@@ -2,7 +2,9 @@ const express = require('express');
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
+const pjson = require('../../package.json');
 
+console.log(pjson.version);
 const router = express.Router();
 
 const PKI_FILE = path.join(
@@ -11,7 +13,7 @@ const PKI_FILE = path.join(
 );
 
 router.get('/', async (req, res) => {
-  res.status(200).json('Covid Guard Api');
+  res.status(200).json(`Covid Guard Api - ${pjson.version}`);
 });
 
 router.get('/ping', async (req, res) => {
