@@ -1,6 +1,6 @@
 {
   "name": "covid-guard-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Covid guard backend - Node Js",
   "main": "src/index.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "http-status-codes": "^2.1.4",
+    "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
     "nodemon": "^1.19.2",

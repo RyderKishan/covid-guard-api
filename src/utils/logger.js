@@ -1,14 +1,10 @@
 const winston = require('winston');
 
 const outputFormat = winston.format.printf(
-  (info) =>
-    `${new Date(info.timestamp).toLocaleTimeString()} [${info.level}] ${
-      info.label
-    } ${info.message}`
+  (info) => `[${info.level}] ${info.label} ${info.message}`
 );
 
 const logFormat = winston.format.combine(
-  winston.format.timestamp(),
   winston.format.colorize(),
   winston.format.label({ label: 'Express ::' })
 );

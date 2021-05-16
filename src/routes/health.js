@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const pjson = require('../../package.json');
 
-console.log(pjson.version);
 const router = express.Router();
 
 const PKI_FILE = path.join(
