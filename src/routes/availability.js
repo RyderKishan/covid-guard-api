@@ -20,7 +20,7 @@ router.get('/kishan', async (req, res) => {
     const maxAgeLimit = 30;
     const onlyAvailable = true;
     const feeType = ['free', 'paid'];
-    const districtIds = [540, 549, 580, 780];
+    const districtIds = [549, 580, 780];
 
     const paths = [];
 
@@ -73,7 +73,7 @@ router.get('/dad', async (req, res) => {
     const maxAgeLimit = 70;
     const onlyAvailable = true;
     const feeType = ['free', 'paid'];
-    const districtIds = [540, 549, 580, 780];
+    const districtIds = [549, 580, 780];
     const today = moment(new Date()).format('DD-MM-YYYY');
 
     const allResponse = await Promise.all(
@@ -123,7 +123,7 @@ router.get('/nemo', async (req, res) => {
     const maxAgeLimit = 30;
     const onlyAvailable = true;
     const feeType = ['free', 'paid'];
-    const districtIds = [540, 549, 580, 780];
+    const districtIds = [549, 580, 780];
 
     // Enable this after june 1
     // const nemoRequestDates = ['15-06-2021', '22-06-2021', '29-06-2021'];
