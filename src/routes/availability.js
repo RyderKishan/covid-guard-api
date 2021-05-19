@@ -42,6 +42,7 @@ router.get('/kishan', async (req, res) => {
         )
       )
     );
+    const allSessions = [];
     // min_age_limit filter
     const finalCenters = allCenters
       .map((c) => {
@@ -52,12 +53,18 @@ router.get('/kishan', async (req, res) => {
             vaccine.includes((s.vaccine || '').toLowerCase()) &&
             (onlyAvailable ? s.available_capacity > 0 : true)
         );
+        filteredSessions.forEach((s) => {
+          allSessions.push(
+            `Kishan - ${s.available_capacity} doses of ${s.vaccine} for ${s.min_age_limit}+ age at (${c.center_id}) ${c.name} - ${c.address}`
+          );
+        });
         return { ...c, sessions: filteredSessions };
       })
       .filter((c) => c.sessions && c.sessions.length > 0);
     if (finalCenters.length > 0) {
       logger.info('Vaccine available for kishan');
-      res.status(200).json(finalCenters);
+      allSessions.forEach((s) => logger.info(s));
+      res.status(200).json(allSessions);
     } else {
       res.status(404).json(finalCenters);
     }
@@ -125,9 +132,8 @@ router.get('/nemo', async (req, res) => {
     const feeType = ['free', 'paid'];
     const districtIds = [549, 580, 780];
 
-    // Enable this after june 1
-    // const nemoRequestDates = ['15-06-2021', '22-06-2021', '29-06-2021'];
-    const nemoRequestDates = ['15-06-2021', '22-06-2021', '29-06-2021'];
+    // Enable this after july 30
+    const nemoRequestDates = ['30-07-2021', '06-08-2021', '13-08-2021'];
     const paths = [];
 
     districtIds.forEach((districtId) => {
@@ -148,6 +154,7 @@ router.get('/nemo', async (req, res) => {
         )
       )
     );
+    const allSessions = []
     // min_age_limit filter
     const finalCenters = allCenters
       .map((c) => {
@@ -158,12 +165,18 @@ router.get('/nemo', async (req, res) => {
             vaccine.includes((s.vaccine || '').toLowerCase()) &&
             (onlyAvailable ? s.available_capacity > 0 : true)
         );
+        filteredSessions.forEach((s) => {
+          allSessions.push(
+            `Nemo - ${s.available_capacity} doses of ${s.vaccine} for ${s.min_age_limit}+ age at (${c.center_id}) ${c.name} - ${c.address}`
+          );
+        });
         return { ...c, sessions: filteredSessions };
       })
       .filter((c) => c.sessions && c.sessions.length > 0);
     if (finalCenters.length > 0) {
       logger.info('Vaccine available for nemo, machan');
-      res.status(200).json(finalCenters);
+      allSessions.forEach((s) => logger.info(s));
+      res.status(200).json(allSessions);
     } else {
       res.status(404).json(finalCenters);
     }
