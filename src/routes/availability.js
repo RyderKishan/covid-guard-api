@@ -10,7 +10,7 @@ const router = express.Router();
 const dates = [
   moment(new Date()).format('DD-MM-YYYY'),
   moment(new Date()).add(7, 'days').format('DD-MM-YYYY'),
-  moment(new Date()).add(14, 'days').format('DD-MM-YYYY'),
+  moment(new Date()).add(14, 'days').format('DD-MM-YYYY')
 ];
 
 router.get('/kishan', async (req, res) => {
@@ -154,7 +154,7 @@ router.get('/nemo', async (req, res) => {
         )
       )
     );
-    const allSessions = []
+    const allSessions = [];
     // min_age_limit filter
     const finalCenters = allCenters
       .map((c) => {

@@ -15,12 +15,12 @@ const logger = winston.createLogger({
   transports: [
     new winston.transports.File({
       filename: 'app.log',
-      format: outputFormat,
+      format: outputFormat
     }),
     new winston.transports.Console({
-      format: outputFormat,
-    }),
-  ],
+      format: outputFormat
+    })
+  ]
 });
 
 logger.stream = {
@@ -34,7 +34,7 @@ logger.stream = {
     } else {
       logger.error(output);
     }
-  },
+  }
 };
 
 module.exports = logger;

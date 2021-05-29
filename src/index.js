@@ -9,6 +9,7 @@ require('dotenv').config();
 const { decode } = require('./utils');
 const Logger = require('./utils/logger');
 const routes = require('./routes');
+const health = require('./routes/health');
 
 const app = express();
 const PORT = process.env.PORT || 9000;
@@ -30,6 +31,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(compression());
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use(health);
 
 app.use((req, res, next) => {
   const key = req.headers['x-api-key'];

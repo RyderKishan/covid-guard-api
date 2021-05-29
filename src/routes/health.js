@@ -3,6 +3,7 @@ const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const pjson = require('../../package.json');
+const client = require('../utils/client');
 
 const router = express.Router();
 
@@ -33,9 +34,9 @@ router.get(
 router.get('/health', (req, res) => {
   res.status(200).json({
     message: 'Application UP!',
-    env: process.env,
     containerName: os.hostname(),
-    timeStamp: new Date().toISOString(),
+    clientStatus: client.status,
+    timeStamp: new Date().toISOString()
   });
 });
 
@@ -45,7 +46,7 @@ router.get('/read', (req, res) => {
     fileList.push(file);
   });
   res.status(200).json({
-    fileList,
+    fileList
   });
 });
 

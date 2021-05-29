@@ -7,7 +7,7 @@ const exceptionHandler = (error, res) => {
     status: R.propOr(500, 'status', error),
     url: R.propOr(originalUrl, 'url', error),
     statusText: R.propOr('', 'statusText', error),
-    data: R.propOr('', 'data', error),
+    data: R.propOr('', 'data', error)
   };
   res.status(customException.status).json(customException);
 };

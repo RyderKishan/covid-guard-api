@@ -10,7 +10,7 @@ const client = new Redis({
   maxRetriesPerRequest: 5000,
   password: process.env.REDIS_PASSWORD || undefined,
   host: process.env.REDIS_HOST || '',
-  db: 0,
+  db: 0
 });
 
 client.on('ready', () => {
