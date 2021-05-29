@@ -6,6 +6,7 @@ const compression = require('compression');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+const { decode } = require('./utils');
 const Logger = require('./utils/logger');
 const routes = require('./routes');
 
@@ -29,15 +30,38 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(compression());
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  const key = req.headers['x-api-key'];
+  const reqTimeStamp = Number(decode(key));
+  const expiryTimeStamp = new Date().valueOf() + 10000;
+  if (
+    key &&
+    !isNaN(reqTimeStamp) &&
+    reqTimeStamp !== 0 &&
+    expiryTimeStamp - reqTimeStamp < 20000
+  ) {
+    next();
+  } else {
+    res.status(400).json({
+      message: 'Invalid Headers',
+      status: 400,
+      url: req.baseUrl,
+      statusText: 'Bad Request',
+      data: undefined
+    });
+  }
+});
+
 app.use(
   morgan(
     (tokens, req, res) =>
       JSON.stringify({
         method: tokens.method(req, res),
         status: tokens.status(req, res),
-        tokens: tokens.url(req, res),
+        url: tokens.url(req, res),
         body: JSON.stringify(req.body),
-        time: `${tokens['response-time'](req, res)} ms`,
+        time: `${tokens['response-time'](req, res)} ms`
       }),
     { stream: Logger.stream }
   )

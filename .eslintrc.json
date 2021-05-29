@@ -11,6 +11,7 @@
   "rules": {
     "no-unused-vars": "warn",
     "camelcase": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "no-restricted-globals": "off"
   }
 }

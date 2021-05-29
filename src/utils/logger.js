@@ -26,7 +26,7 @@ const logger = winston.createLogger({
 logger.stream = {
   write(message) {
     const data = JSON.parse(message);
-    const output = `${data.method} ${data.status} ${data.tokens} ${data.body} ${data.time}`;
+    const output = `${data.method} ${data.status} ${data.url} ${data.body} ${data.time}`;
     if (data.status < 299) {
       logger.info(output);
     } else if (data.status < 399) {
