@@ -42,7 +42,7 @@ app.use((req, res, next) => {
     key &&
     !isNaN(reqTimeStamp) &&
     reqTimeStamp !== 0 &&
-    expiryTimeStamp - reqTimeStamp < 20000
+    expiryTimeStamp - reqTimeStamp < 40000
   ) {
     next();
   } else {
