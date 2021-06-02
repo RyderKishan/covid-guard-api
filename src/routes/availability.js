@@ -13,7 +13,7 @@ const dates = [
   moment(new Date()).add(14, 'days').format('DD-MM-YYYY')
 ];
 
-router.get('/kishan', async (req, res) => {
+router.get('/availability/kishan', async (req, res) => {
   try {
     const vaccine = ['covaxin', 'covishield'];
     const minAgeLimit = 15;
@@ -73,7 +73,7 @@ router.get('/kishan', async (req, res) => {
   }
 });
 
-router.get('/dad', async (req, res) => {
+router.get('/availability/dad', async (req, res) => {
   try {
     const vaccine = ['covaxin', 'covishield'];
     const minAgeLimit = 40;
@@ -123,7 +123,7 @@ router.get('/dad', async (req, res) => {
   }
 });
 
-router.get('/nemo', async (req, res) => {
+router.get('/availability/nemo', async (req, res) => {
   try {
     const vaccine = ['covaxin', 'covishield'];
     const minAgeLimit = 50;
