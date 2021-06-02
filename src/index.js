@@ -10,6 +10,7 @@ const { decode } = require('./utils');
 const Logger = require('./utils/logger');
 const routes = require('./routes');
 const health = require('./routes/health');
+const availability = require('./routes/availability');
 
 const app = express();
 const PORT = process.env.PORT || 9000;
@@ -33,6 +34,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use(health);
+app.use(availability);
 
 app.use((req, res, next) => {
   const key = req.headers['x-api-key'];
